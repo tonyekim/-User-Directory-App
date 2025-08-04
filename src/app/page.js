@@ -1,130 +1,3 @@
-// "use client";
-// import { useState, useEffect, useMemo } from "react";
-// import UserCard from "@/components/UserCard";
-// import UserCardSkeleton from "@/components/UserCardSkeleton";
-// import { useUsers } from "../hooks/useUsers";
-// import { motion } from 'framer-motion';
-// import UserModal from "@/components/UserModal";
-
-// export default function Home() {
-//   const { users, loading, loadingMore, error, loadMoreUsers } = useUsers();
-//   const [searchTerm, setSearchTerm] = useState("");
-//   const [selectedUser, setSelectedUser] = useState(null);
-
-//   // Memoize filtered users to prevent re-calculation on every render
-//   const filteredUsers = useMemo(() => {
-//     return users.filter((user) =>
-//       `${user.name.first} ${user.name.last}`
-//         .toLowerCase()
-//         .includes(searchTerm.toLowerCase())
-//     );
-//   }, [users, searchTerm]);
-
-//   // Set theme colors (in a real app, this would be in a global CSS or layout file)
-//   useEffect(() => {
-//     document.documentElement.style.setProperty(
-//       "--background",
-//       "hsl(0 0% 100%)"
-//     );
-//     document.documentElement.style.setProperty(
-//       "--foreground",
-//       "hsl(222.2 84% 4.9%)"
-//     );
-//     document.documentElement.style.setProperty("--card", "hsl(0 0% 100%)");
-//     document.documentElement.style.setProperty(
-//       "--card-foreground",
-//       "hsl(222.2 84% 4.9%)"
-//     );
-//     document.documentElement.style.setProperty("--muted", "hsl(210 40% 96.1%)");
-//     document.documentElement.style.setProperty(
-//       "--muted-foreground",
-//       "hsl(215.4 16.3% 46.9%)"
-//     );
-//   }, []);
-
-//   const cardVariants = {
-//     hidden: { opacity: 0, y: 20 },
-//     visible: (i) => ({
-//       opacity: 1,
-//       y: 0,
-//       transition: {
-//         delay: i * 0.05,
-//         type: "spring",
-//         stiffness: 400,
-//         damping: 15,
-//       },
-//     }),
-//   };
-
-//   return (
-//     <div className="bg-background min-h-screen font-sans">
-//       <div className="container mx-auto px-4 py-8 sm:py-12">
-//         <header className="text-center mb-8 sm:mb-12">
-//           <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground">
-//             User Directory
-//           </h1>
-//           <p className="text-lg text-muted-foreground mt-2">
-//             Search, discover, and learn more about our users.
-//           </p>
-//         </header>
-
-//         <div className="mb-8 max-w-lg mx-auto">
-//           <input
-//             type="text"
-//             placeholder="Search by name..."
-//             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-800 dark:border-gray-600 dark:text-white"
-//             value={searchTerm}
-//             onChange={(e) => setSearchTerm(e.target.value)}
-//           />
-//         </div>
-
-//         {error && <div className="text-center text-red-500">{error}</div>}
-
-//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-//           {loading
-//             ? Array.from({ length: 10 }).map((_, index) => (
-//                 <UserCardSkeleton key={index} />
-//               ))
-//             : filteredUsers.map((user, i) => (
-//                 <motion.div
-//                   key={user.login.uuid}
-//                   custom={i}
-//                   variants={cardVariants}
-//                   initial="hidden"
-//                   animate="visible"
-//                   layout
-//                 >
-//                   <UserCard user={user} onCardClick={setSelectedUser} />
-//                 </motion.div>
-//               ))}
-//         </div>
-
-//         {!loading && filteredUsers.length === 0 && searchTerm && (
-//           <div className="text-center col-span-full py-12 text-muted-foreground">
-//             <h3 className="text-xl font-semibold">No users found</h3>
-//             <p>Try adjusting your search term.</p>
-//           </div>
-//         )}
-
-//         <div className="text-center mt-12">
-//           {users.length > 0 && (
-//             <button
-//               onClick={loadMoreUsers}
-//               disabled={loadingMore}
-//               className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-200"
-//             >
-//               {loadingMore ? "Loading..." : "Load More"}
-//             </button>
-//           )}
-//         </div>
-//       </div>
-
-//       <UserModal user={selectedUser} onClose={() => setSelectedUser(null)} />
-//     </div>
-//   );
-// }
-
-
 "use client";
 import { useState, useEffect, useMemo } from "react";
 import UserCard from "@/components/UserCard";
@@ -138,7 +11,7 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
 
-  // Memoize filtered users to prevent re-calculation on every render
+
   const filteredUsers = useMemo(() => {
     return users.filter((user) =>
       `${user.name.first} ${user.name.last}`
@@ -214,7 +87,6 @@ export default function Home() {
 
   return (
     <div className="bg-background min-h-screen font-sans relative overflow-hidden">
-      {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-10 animate-pulse" />
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full opacity-10 animate-pulse delay-1000" />
@@ -228,7 +100,7 @@ export default function Home() {
           initial="hidden"
           animate="visible"
         >
-          {/* Enhanced Title with gradient text and animations */}
+
           <div className="relative inline-block">
             <h1 className="text-4xl sm:text-6xl font-extrabold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent animate-gradient-x mb-4 relative">
               User Directory
@@ -252,7 +124,6 @@ export default function Home() {
           </motion.p>
         </motion.header>
 
-        {/* Enhanced Search Input */}
         <motion.div 
           className="mb-8 max-w-lg mx-auto"
           initial={{ opacity: 0, y: 20 }}
@@ -267,7 +138,6 @@ export default function Home() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            {/* Search icon */}
             <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -323,7 +193,6 @@ export default function Home() {
           </motion.div>
         )}
 
-        {/* Enhanced Load More Button */}
         <div className="text-center mt-16">
           {users.length > 0 && (
             <motion.button
@@ -366,7 +235,6 @@ export default function Home() {
                 )}
               </span>
               
-              {/* Glow effect */}
               <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
                 loadingMore ? '' : 'bg-gradient-to-r from-purple-600/50 via-pink-600/50 to-blue-600/50 blur-xl'
               }`} />
@@ -377,7 +245,6 @@ export default function Home() {
 
       <UserModal user={selectedUser} onClose={() => setSelectedUser(null)} />
 
-      {/* Custom CSS for animations */}
       <style jsx>{`
         @keyframes gradient-x {
           0%, 100% {
